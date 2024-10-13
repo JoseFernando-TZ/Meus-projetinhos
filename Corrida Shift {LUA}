@@ -1,0 +1,22 @@
+local player = game:GetService("Players").LocalPlayer -- Quando o jogador entra
+local UserInputService = game:GetService("UserInputService") -- Biblioteca
+local canRunpickUp = 
+		player.CharacterAdded:Connect(function() -- Função de instância
+	canRun = workspace:WaitForChild(player.Name):WaitForChild("Humanoid"):WaitForChild("canRun")
+end)
+
+UserInputService.InputBegan:Connect(function(input, state) -- Verifica se o jogador apertou a tecla
+	if state then return end
+	if input.UserInputType == Enum.UserInputType.Keyboard then
+		if input.KeyCode == Enum.KeyCode.LeftShift and canRun.Value == true then -- Verifica se foi o Shift esquerdo e se está apto para correr
+			player.Character.Humanoid.WalkSpeed = 22 -- Mudança na velocidade
+		end
+	end
+end)
+UserInputService.InputEnded:Connect(function(input, state) -- Verifica se o jogador soltou a tecla
+	if input.UserInputType == Enum.UserInputType.Keyboard then
+		if input.KeyCode == Enum.KeyCode.LeftShift and canRun.Value == true then -- Verifica se foi o Shift esquerdo e se está apto para correr
+			player.Character.Humanoid.WalkSpeed = 16 -- Mudança na velocidade
+		end
+	end
+end)
