@@ -1,0 +1,9 @@
+game.Players.PlayerAdded:Connect(function(player)-- função
+	player.CharacterAdded:Connect(function()--Quando o usuário entra
+		local humanoid = workspace:WaitForChild(player.name):WaitForChild("Humanoid")--Aguarda usuário
+		local disco = Instance.new("BoolValue", humanoid)-- Cria novo atributo no personagem do jogador
+		disco.Name = "isBurn"
+		disco.Value = false
+		print(disco.Parent)
+	end)
+end)
