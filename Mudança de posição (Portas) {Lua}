@@ -1,0 +1,84 @@
+local TS = game:GetService("TweenService") -- Utilização de biblioteca + setando propriedades
+local TInfo = TweenInfo.new(
+	4,
+	Enum.EasingStyle.Linear,
+	Enum.EasingDirection.Out,
+	0,
+	false,
+	0
+)
+local isOpen = false -- Verifica se a porta está fechada
+--
+-- Instanciando objetos
+local door = script.Parent
+local B1 = script.Parent.Parent.B1.ProximityPrompt
+local B2 = script.Parent.Parent.B2.ProximityPrompt
+local Neon1 = script.Parent.Parent.Neon1
+local Neon2 = script.Parent.Parent.Neon2
+--
+
+local open = {
+	Position = Vector3.new(138.7, 5.246, 99.898)
+}-- Posição que a porta estará aberta
+local close = {
+	Position = Vector3.new(146.823, 6.75, 99.898)
+}-- Posição que a porta estará fechada
+
+--
+
+local OpenT = TS:Create(door, TInfo, open)
+local CloseT = TS:Create(door, TInfo, close)
+
+--
+-- Chamada de função
+function OpenF ()
+	OpenT:Play()
+end
+function CloseF ()
+	CloseT:Play()
+end
+
+--
+-- Funções: 
+B1.Triggered:Connect(function()-- Quando o jogador apertar o botão
+	if isOpen == false  then
+		OpenF()
+		wait(4)
+		isOpen = true
+		Neon1.BrickColor = BrickColor.new("Lime green")-- muda cor do led
+		Neon2.BrickColor = BrickColor.new("Lime green")
+		B1.ActionText = "Close" -- muda texto da caixa de ação
+		B2.ActionText = "Close"
+	else
+		if isOpen == true  then
+			CloseF()
+			wait(4)
+			isOpen = false
+			Neon1.BrickColor = BrickColor.new("Really red")
+			Neon2.BrickColor = BrickColor.new("Really red")
+			B1.ActionText = "Open"
+			B2.ActionText = "Open"
+		end
+	end
+end)
+B2.Triggered:Connect(function()
+	if isOpen == false  then
+		OpenF()
+		wait(4)
+		isOpen = true
+		Neon1.BrickColor = BrickColor.new("Lime green")
+		Neon2.BrickColor = BrickColor.new("Lime green")
+		B2.ActionText = "Close"
+		B1.ActionText = "Close"
+	else
+		if isOpen == true  then
+			CloseF()
+			wait(4)
+			isOpen = false
+			Neon1.BrickColor = BrickColor.new("Really red")
+			Neon2.BrickColor = BrickColor.new("Really red")
+			B2.ActionText = "Open"
+			B1.ActionText = "Open"
+		end
+	end
+end)
