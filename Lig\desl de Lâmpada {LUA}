@@ -1,0 +1,33 @@
+
+-- Instância de Objetos 
+local B = script.Parent.Parent.Parent.Button.PP.ProximityPrompt
+local L = script.Parent.PointLight
+local N1 = script.Parent.Parent.N
+local N2 = script.Parent.Parent.N2
+local S = script.Parent.Parent.SoundL
+--
+--Função
+B.Triggered:Connect(function()
+	
+	if L.Brightness == 1 then--Verifica se a luz está acesa
+		
+		wait(3.5)
+		L.Brightness = 0
+		N1.Material = "SmoothPlastic"--Troca material da luz
+		N1.BrickColor = BrickColor.new("Mid gray")--Troca cor da luz
+		N2.Material = "SmoothPlastic"
+		N2.BrickColor = BrickColor.new("Mid gray")
+		S:Play()
+		
+	else
+		
+		wait(3.5)
+		L.Brightness = 1
+		N1.Material = "Neon"
+		N1.BrickColor = BrickColor.new("White")
+		N2.Material = "Neon"
+		N2.BrickColor = BrickColor.new("White")
+		S:Play()	
+	end
+	
+end)
